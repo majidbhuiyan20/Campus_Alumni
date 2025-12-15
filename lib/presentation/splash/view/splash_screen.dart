@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../../../core/route/route_manager.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -70,14 +69,18 @@ class _SplashScreenState extends State<SplashScreen>
               ),
             ),
 
-            // Subtle pattern overlay
+            // Subtle pattern overlay (removed problematic asset)
             Opacity(
               opacity: 0.05,
               child: Container(
                 decoration: BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/pattern.png'), // Add your pattern image
-                    repeat: ImageRepeat.repeat,
+                  // Create a subtle pattern without external image
+                  gradient: RadialGradient(
+                    radius: 2.0,
+                    colors: [
+                      Colors.white.withOpacity(0.2),
+                      Colors.transparent,
+                    ],
                   ),
                 ),
               ),
@@ -195,7 +198,8 @@ class _SplashScreenState extends State<SplashScreen>
                           opacity: _fadeAnimation,
                           child: ElevatedButton(
                             onPressed: () {
-                              // Navigate to next screen
+                              // Navigate to login screen
+                              Navigator.pushNamed(context, Routes.loginRoute);
                             },
                             style: ElevatedButton.styleFrom(
                               backgroundColor: Colors.white,
@@ -210,27 +214,22 @@ class _SplashScreenState extends State<SplashScreen>
                               elevation: 8,
                               shadowColor: Colors.blueAccent.withOpacity(0.4),
                             ),
-                            child: InkWell(
-                              onTap: () {
-                                Navigator.pushNamed(context, Routes.bottomNavBarRoute);
-                              },
-                              child: Row(
-                                mainAxisSize: MainAxisSize.min,
-                                children: [
-                                  Text(
-                                    'Get Started',
-                                    style: TextStyle(
-                                      fontSize: 18,
-                                      fontWeight: FontWeight.w600,
-                                    ),
+                            child: Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Text(
+                                  'Get Started',
+                                  style: TextStyle(
+                                    fontSize: 18,
+                                    fontWeight: FontWeight.w600,
                                   ),
-                                  SizedBox(width: 12),
-                                  Icon(
-                                    Icons.arrow_forward_rounded,
-                                    size: 20,
-                                  ),
-                                ],
-                              ),
+                                ),
+                                SizedBox(width: 12),
+                                Icon(
+                                  Icons.arrow_forward_rounded,
+                                  size: 20,
+                                ),
+                              ],
                             ),
                           ),
                         ),
