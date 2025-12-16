@@ -1,4 +1,5 @@
 import 'package:campus_alumni/core/route/route_manager.dart';
+import 'package:campus_alumni/presentation/user_profile/view/user_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -77,11 +78,12 @@ class _LoginScreenState extends State<LoginScreen> {
       // Add a small delay for smooth transition
       await Future.delayed(const Duration(milliseconds: 300));
 
-      Navigator.pushNamedAndRemoveUntil(
-        context,
-        Routes.bottomNavBarRoute,
-            (route) => false,
-      );
+      // Navigator.pushNamedAndRemoveUntil(
+      //   context,
+      //   Routes.bottomNavBarRoute,
+      //       (route) => false,
+      // );
+      Navigator.push(context, MaterialPageRoute(builder: (_)=>UserProfileForm(initialName: userCredential.user!.displayName!,)));
     } catch (e) {
       if (mounted) {
         Navigator.pop(context); // Remove loading dialog
