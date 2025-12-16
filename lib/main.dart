@@ -1,10 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import 'core/route/route_manager.dart';
 
-void main() {
+void main() async{
+  WidgetsFlutterBinding.ensureInitialized(); // Important!
+  await Firebase.initializeApp();
   runApp( ProviderScope(child: MyApp()));
 }
 
@@ -24,7 +27,7 @@ class MyApp extends StatelessWidget {
             title: 'Riverpod MVVM Demo',
             theme: ThemeData(primarySwatch: Colors.blue),
             onGenerateRoute: RouteGenerator.getRoute,
-            initialRoute: Routes.splashRoute,
+            initialRoute: Routes.wrapperRoute,
           );
         }
     );
